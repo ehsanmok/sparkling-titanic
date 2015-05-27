@@ -93,7 +93,7 @@ if __name__ == "__main__":
     ## NOTE: rdd1.zip(rdd2) works provided that both RDDs have the same partitioner and the same number 
     # of elements per partition, otherwise should either repartition or can do:
     # submit = sqlCtx.createDataFrame(pred.zipWithIndex().map(lambda x: (x[1]+892L, x[0])), ["PassengerId", "Survived"])
-    # Side: 891L is the number training samples
+    # Side: 891L is the number of training samples
     os.chdir(DATADIR)
     # file is small so can save pandas.DataFrame as csv
     submit.toPandas().to_csv("prediction.csv", index = False)
