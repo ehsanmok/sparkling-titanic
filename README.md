@@ -14,7 +14,7 @@ The following will be added later
 
 ### Loading PySpark Script
 
-Run `$SPARK_HOME/bin/spark-submit scriptDirectoryPath/titanic_logReg.py`. For multithreading, you can add option `--master local[N]` where N is the number of threads.
+Run `$SPARK_HOME/bin/spark-submit scriptDirectoryPath/titanic_logReg.py`. For multithreading, you can add the option `--master local[N]` where N is the number of threads.
 
 
 
