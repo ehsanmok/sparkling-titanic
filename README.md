@@ -3,7 +3,7 @@ Sparkling Titanic
 
 ### Sparkling Titanic
 
-This program trains a logistic regression and makes prediction for [Titanic dataset](http://kaggle.com/c/titanic/data) as part of Kaggle competition using Apache-Spark `spark-1.3.1-bin-hadoop2.4` and its Python API on a local machine. I used `pyspark_csv.py` [here](http://github.com/seahboonsiew/pyspark-csv) to load data as Spark DataFrame. 
+This program trains a logistic regression and makes prediction for [Titanic dataset](http://kaggle.com/c/titanic/data) as part of Kaggle competition using Apache-Spark [spark-1.3.1-bin-hadoop2.4](http://spark.apache.org/downloads.html) and its Python API on a local machine. I used `pyspark_csv.py` to load data as Spark DataFrame, for more instructions see [this](http://github.com/seahboonsiew/pyspark-csv). 
 
 The following will be added later
 
@@ -14,7 +14,7 @@ The following will be added later
 
 ### Loading PySpark Script
 
-Run `$SPARK_HOME/bin/spark-submit ScriptDirectory/titanic_logReg.py`. For multithreading, add `--master local[N]` where N is the number of threads.
+Run `$SPARK_HOME/bin/spark-submit scriptDirectoryPath/titanic_logReg.py`. For multithreading, add option `--master local[N]` where N is the number of threads.
 
 
 
