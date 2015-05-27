@@ -12,9 +12,9 @@ The following will be added later
 *   Using more features and feature engineering
 *   RandomForest classifier, SVM, etc.
 
-### Loading PySpark Script
+### Running PySpark Script in Shell
 
-Run `$SPARK_HOME/bin/spark-submit scriptDirectoryPath/titanic_logReg.py`. For multithreading, you can add the option `--master local[N]` where N is the number of threads.
+Use `$SPARK_HOME/bin/spark-submit scriptDirectoryPath/titanic_logReg.py`. For multithreading, you can add the option `--master local[N]` where N is the number of threads.
 
 
 
