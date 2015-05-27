@@ -16,7 +16,7 @@
 from pyspark import SparkContext, SparkConf
 from pyspark.ml.classification import LogisticRegression
 from pyspark.sql import SQLContext, Row
-from pyspark.sql.types import *
+from pyspark.sql.types import IntegerType
 from pyspark.sql.functions import UserDefinedFunction
 from pyspark.mllib.linalg import Vectors
 import os
@@ -62,6 +62,8 @@ def sex_to_bin(df):
     if column == 'Sex' else column for column in df.columns])
     return df
 
+#------------------------------------------------------------
+
 if __name__ == "__main__":
     
     train = loadDF("train.csv")
@@ -90,10 +92,12 @@ if __name__ == "__main__":
     
     # configure the submission format as follows
     submit = sqlCtx.createDataFrame(testPassengerId.zip(pred), ["PassengerId", "Survived"])
-    ## NOTE: rdd1.zip(rdd2) works provided that both RDDs have the same partitioner and the same number 
-    # of elements per partition, otherwise should either repartition or can do:
-    # submit = sqlCtx.createDataFrame(pred.zipWithIndex().map(lambda x: (x[1]+892L, x[0])), ["PassengerId", "Survived"])
-    # Side: 891L is the number training samples
+    """
+    NOTE: rdd1.zip(rdd2) works provided that both RDDs have the same partitioner and the same number 
+    of elements per partition, otherwise should either repartition or can do:
+    submit = sqlCtx.createDataFrame(pred.zipWithIndex().map(lambda x: (x[1]+892L, x[0])), ["PassengerId", "Survived"])
+    where 891L is the number training samples
+    """
     os.chdir(DATADIR)
     # file is small so can save pandas.DataFrame as csv
     submit.toPandas().to_csv("prediction.csv", index = False)
