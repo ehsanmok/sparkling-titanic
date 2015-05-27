@@ -3,7 +3,7 @@ Sparkling Titanic
 
 ### Introduction
 
-`titanic_logReg.py` trains a Logistic Regression and makes prediction for [Titanic dataset](http://kaggle.com/c/titanic/data) as part of Kaggle competition using Apache-Spark [spark-1.3.1-bin-hadoop2.4](http://spark.apache.org/downloads.html) and its Python API on a local machine. I used `pyspark_csv.py` to load data as Spark DataFrame, for more instructions see [this](http://github.com/seahboonsiew/pyspark-csv). 
+`titanic_logReg.py` trains a Logistic Regression and makes prediction for [Titanic dataset](http://kaggle.com/c/titanic/data) as part of Kaggle competition using Apache-Spark [spark-1.3.1-bin-hadoop2.4](http://spark.apache.org/downloads.html) with its Python API on a local machine. I used `pyspark_csv.py` to load data as Spark DataFrame, for more instructions see [this](http://github.com/seahboonsiew/pyspark-csv). 
 
 The following will be added later
 
