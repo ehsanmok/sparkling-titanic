@@ -24,7 +24,7 @@ import pyspark_csv as pycsv
 
 os.environ["SPARK_LOCAL_IP"] = "127.0.1.1" # set local IP
 
-DATADIR = "./Python/PySpark/Titanic/data" # data directory
+DATADIR = "~/sparkling-titanic/data" # data directory
 
 def mySparkContext():
     """
@@ -54,7 +54,7 @@ def loadDF(filename):
 # DataFrames are immutable. Must transform RDD to another RDD for binary sex
 udf = UserDefinedFunction(lambda x: 1 if x == "male" else 0, IntegerType())
 
-def sex_to_bin(df):
+def sexToBin(df):
     """
     Maps male to 1 and female to 0
     """
@@ -74,19 +74,19 @@ if __name__ == "__main__":
     train = train.select('Survived', 'Pclass', 'Sex', 'SibSp', 'Parch')
     test = test.select('Pclass', 'Sex', 'SibSp', 'Parch')
 
-    train = sex_to_bin(train)
-    test = sex_to_bin(test)
+    train = sexToBin(train)
+    test = sexToBin(test)
 
     print "number of men in train and test resp. : %d, %d" \
         %(train.select('Sex').map(lambda x: x.Sex).sum() \
         ,test.select('Sex').map(lambda x: x.Sex).sum())
 
     # format train for Logistic Regression as (label, features)
-    ntrain = train.map(lambda x: Row(label = float(x[0]) \
-         ,features = Vectors.dense(x[1:]))).toDF().cache() # Logistic Regression is iterative, need caching
-    ntest = test.map(lambda x: Row(features = Vectors.dense(x[0:]))).toDF()
+    ntrain = train.map(lambda x: Row(label=float(x[0]) \
+         ,features=Vectors.dense(x[1:]))).toDF().cache() # Logistic Regression is iterative, need caching
+    ntest = test.map(lambda x: Row(features=Vectors.dense(x[0:]))).toDF()
     
-    lr = LogisticRegression(maxIter = 100, regParam = 0.1)
+    lr = LogisticRegression(maxIter=100, regParam=0.1)
     model = lr.fit(ntrain)
     pred = model.transform(ntest).select('prediction').map(lambda x: x.prediction)
     
@@ -100,9 +100,9 @@ if __name__ == "__main__":
     """
     os.chdir(DATADIR)
     # file is small so can save pandas.DataFrame as csv
-    submit.toPandas().to_csv("prediction.csv", index = False)
+    submit.toPandas().to_csv("prediction.csv", index=False)
     # if not, should saveAsTextFile:
-    # submit.rdd.saveAsTextFile("/home/ehsan/Python/PySpark/Titanic/data/prediction")
+    # submit.rdd.saveAsTextFile("../Titanic/data/prediction")
     sc.stop()
 
  
